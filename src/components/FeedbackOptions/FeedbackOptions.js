@@ -1,46 +1,27 @@
-import React from "react";
-import Section from "../Section/Section";
-import s from "./FeedbackOptions.module.css";
+import React from 'react';
+import PropTypes from 'prop-types';
+import s from './FeedbackOptions.module.css';
 
-class FeedbackOptions extends React.Component {
-  handleIncrement = () => {};
+const FeedbackOptions = ({ options, onLeaveFeedback }) => (
+  <ul className={s.buttonList}>
+    {options.map((option, index) => (
+      <li key={index}>
+        <button
+          type="button"
+          className={s.button}
+          name={option}
+          onClick={onLeaveFeedback}
+        >
+          {option}
+        </button>
+      </li>
+    ))}
+  </ul>
+);
 
-  handleDecrement = () => {};
-  render() {
-    return (
-      <Section title="Please leave feedback">
-        <ul className={s.buttonList}>
-          <li>
-            <button
-              type="button"
-              className={s.button}
-              onClick={this.handleIncrement}
-            >
-              Good
-            </button>
-          </li>
-          <li>
-            <button
-              type="button"
-              className={s.button}
-              onClick={this.handleIncrement}
-            >
-              Neutral
-            </button>
-          </li>
-          <li>
-            <button
-              type="button"
-              className={s.button}
-              onClick={this.handleIncrement}
-            >
-              Bad
-            </button>
-          </li>
-        </ul>
-      </Section>
-    );
-  }
-}
+FeedbackOptions.propTypes = {
+  options: PropTypes.array.isRequired,
+  onLeaveFeedback: PropTypes.func.isRequired,
+};
 
 export default FeedbackOptions;
