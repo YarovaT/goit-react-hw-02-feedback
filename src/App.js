@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
-import Section from './components/Section/Section';
-import FeedbackOptions from './components/FeedbackOptions/FeedbackOptions';
-import Statistics from './components/Statistics/Statistics';
-import Notification from './components/Notification/Notification';
+import Section from './components/Section/';
+import FeedbackOptions from './components/FeedbackOptions/';
+import Statistics from './components/Statistics/';
+import Notification from './components/Notification/';
 
 class App extends Component {
   state = {
@@ -37,23 +37,17 @@ class App extends Component {
     }));
   };
 
-  toggle = () => {
-    this.setState(prevState => ({
-      visible: !prevState.visible,
-    }));
-  };
-
   render() {
     const { good, neutral, bad } = this.state;
     const total = this.countTotalFeedback();
     const positivePercentage = this.countPositiveFeedbackPercentage();
-    const objKey = Object.keys(this.state);
+    const options = Object.keys(this.state);
 
     return (
       <>
         <Section title="Please leave feedback">
           <FeedbackOptions
-            options={objKey}
+            options={options}
             onLeaveFeedback={this.onLeaveFeedback}
           />
         </Section>
