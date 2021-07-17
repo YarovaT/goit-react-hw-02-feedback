@@ -2,6 +2,7 @@
   display: inline-flex;
   margin: 0 4px;
   padding: 5px;
+  cursor: pointer;
 
   border-radius: 10px;
   font-size: 14px;
