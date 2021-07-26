@@ -6,14 +6,21 @@ import Statistics from './components/Statistics/';
 import Notification from './components/Notification/';
 
 class App extends Component {
-  state = {
+  static defaultProps = {
     good: 0,
     neutral: 0,
     bad: 0,
   };
 
+  state = {
+    good: this.props.good,
+    neutral: this.props.neutral,
+    bad: this.props.bad,
+  };
+
   countTotalFeedback = () => {
-    return Object.values(this.state).reduce((a, b) => a + b, 0);
+    const { good, neutral, bad } = this.state;
+    return good + neutral + bad;
   };
 
   countPositiveFeedbackPercentage = () => {
@@ -37,11 +44,14 @@ class App extends Component {
     }));
   };
 
+  getVisibleContacts = () => {
+    return this.state;
+  };
+
   render() {
-    const { good, neutral, bad } = this.state;
     const total = this.countTotalFeedback();
-    const positivePercentage = this.countPositiveFeedbackPercentage();
     const options = Object.keys(this.state);
+    const percentage = this.countPositiveFeedbackPercentage();
 
     return (
       <>
@@ -55,11 +65,9 @@ class App extends Component {
         <Section title="Statistics">
           {total > 0 ? (
             <Statistics
-              good={good}
-              neutral={neutral}
-              bad={bad}
+              props={this.state}
               total={total}
-              positivePercentage={positivePercentage}
+              positivePercentage={percentage}
             />
           ) : (
             <Notification message="No feedback given" />
